@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>عزّنا بشجاعتنا في ميادين الدفاع عن الوطن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-950:#0B3D2E; --green-800:#124A37; --green-600:#1B6B4C; --green-500:#2F7D5C;
+  --gold:#C8A15C; --cream:#F7F5EE; --ink:#12241C; --ink-soft:#3E5449;
+  --card:#FFFFFF; --line:#E1E4DE; --shadow:0 10px 28px rgba(11,61,46,.10);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --cream:#0E1712; --ink:#EDF3EE; --ink-soft:#B9C7BE; --card:#152420; --line:#25352C; --shadow:0 10px 28px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --cream:#0E1712; --ink:#EDF3EE; --ink-soft:#B9C7BE; --card:#152420; --line:#25352C; --shadow:0 10px 28px rgba(0,0,0,.4);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--cream); color:var(--ink); font-family:'Tajawal',sans-serif; line-height:1.7; overflow-x:hidden;}
+h1,h2,h3,.display{font-family:'Lalezar',sans-serif; font-weight:400; letter-spacing:.5px;}
+a{color:inherit;}
+img{max-width:100%;}
+.wrap{max-width:820px; margin:0 auto; padding:0 22px;}
+
+.diamonds{height:16px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16'%3E%3Cpolygon points='12,2 22,8 12,14 2,8' fill='%232F7D5C'/%3E%3C/svg%3E"); background-repeat:repeat-x; background-size:24px 16px; opacity:.55;}
+
+/* progress dots */
+.navdots{position:fixed; inset-inline-end:14px; top:50%; transform:translateY(-50%); z-index:40; display:flex; flex-direction:column; gap:10px;}
+.navdots button{width:9px; height:9px; border-radius:50%; border:1px solid var(--gold); background:transparent; padding:0; cursor:pointer; transition:.25s;}
+.navdots button.active{background:var(--gold); width:11px; height:11px;}
+@media (max-width:640px){.navdots{display:none;}}
+
+/* top index bar */
+.topbar{position:fixed; top:env(safe-area-inset-top,0px); inset-inline:0; z-index:50; display:flex; justify-content:flex-end; padding:12px 16px;}
+.menu-btn{background:rgba(11,61,46,.88); backdrop-filter:blur(6px); color:#fff; border:1px solid rgba(200,161,92,.5); border-radius:100px; padding:9px 16px; font-family:'Tajawal'; font-weight:700; font-size:14px; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.2);}
+.index-overlay{position:fixed; inset:0; background:rgba(11,20,16,.6); z-index:60; display:none; align-items:flex-start; justify-content:center; padding-top:calc(env(safe-area-inset-top,0px) + 66px);}
+.index-overlay.open{display:flex;}
+.index-panel{background:var(--card); width:min(92vw,380px); border-radius:18px; box-shadow:0 20px 50px rgba(0,0,0,.35); overflow:hidden; max-height:75vh; display:flex; flex-direction:column;}
+.index-head{display:flex; justify-content:space-between; align-items:center; padding:16px 18px; background:var(--green-950); color:#fff; font-weight:700;}
+.close-btn{background:none; border:none; color:#fff; font-size:18px; cursor:pointer;}
+.index-list{overflow-y:auto; padding:8px;}
+.index-item{display:flex; align-items:center; gap:12px; padding:13px 12px; border-radius:12px; cursor:pointer; font-size:15px; color:var(--ink);}
+.index-item:hover{background:var(--green-light,rgba(47,125,92,.1));}
+.index-item .num{flex:none; width:26px; height:26px; border-radius:50%; background:var(--green-600); color:#fff; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Tajawal'; font-weight:700;}
+
+/* HERO */
+.hero{position:relative; min-height:92vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:radial-gradient(1200px 600px at 50% -10%, var(--green-600), var(--green-950) 65%); color:#fff; padding:70px 22px 40px; overflow:hidden;}
+.hero::before{content:"";position:absolute; inset:0; background-image:radial-gradient(rgba(200,161,92,.15) 1px, transparent 1px); background-size:26px 26px; opacity:.5;}
+.hero-kicker{font-size:14px; letter-spacing:2px; color:var(--gold); margin-bottom:10px; opacity:0; animation:rise .7s .1s forwards;}
+.hero h1{font-size:clamp(34px,7vw,58px); margin:0 0 18px; opacity:0; animation:rise .8s .25s forwards;}
+.hero p.sub{max-width:560px; color:#DCEAE1; font-size:17px; opacity:0; animation:rise .8s .45s forwards;}
+.hero .badges{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:26px; opacity:0; animation:rise .8s .6s forwards;}
+.badge{border:1px solid rgba(255,255,255,.35); border-radius:100px; padding:7px 16px; font-size:13.5px; color:#fff;}
+@keyframes rise{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);}}
+.scrolldown{position:absolute; bottom:26px; font-size:13px; color:#BFD3C7; opacity:0; animation:rise .8s .8s forwards, bob 2s 1.6s infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+@media (prefers-reduced-motion: reduce){.hero-kicker,.hero h1,.hero p.sub,.hero .badges,.scrolldown{animation:none; opacity:1;}}
+
+/* sections */
+section.sec{padding:64px 0 10px;}
+.eyebrow{color:var(--green-500); font-weight:700; font-size:14px; margin-bottom:6px;}
+h2.title{font-size:clamp(26px,4vw,34px); margin:0 0 26px;}
+
+/* timeline / agenda */
+.timeline{display:flex; flex-direction:column; gap:12px;}
+.phase{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 18px; box-shadow:var(--shadow); cursor:pointer; transition:transform .2s;}
+.phase:hover{transform:translateY(-2px);}
+.phase-head{display:flex; justify-content:space-between; align-items:center; gap:12px;}
+.phase-time{color:var(--green-500); font-weight:700; font-size:14px; white-space:nowrap;}
+.phase-title{font-weight:700; font-size:16.5px;}
+.phase-desc{max-height:0; overflow:hidden; transition:max-height .3s ease, margin-top .3s ease; font-size:14.5px; color:var(--ink-soft);}
+.phase.open .phase-desc{max-height:80px; margin-top:8px;}
+.chev{transition:transform .25s; color:var(--gold);}
+.phase.open .chev{transform:rotate(180deg);}
+
+/* timer */
+.timer-card{background:var(--green-950); color:#fff; border-radius:20px; padding:26px; text-align:center; margin-top:22px;}
+.timer-num{font-family:'Lalezar',sans-serif; font-size:56px; color:var(--gold);}
+.timer-label{font-size:14px; color:#CFE1D7; margin-bottom:14px;}
+.timer-btns{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+.tbtn{background:var(--gold); color:var(--green-950); border:none; padding:9px 18px; border-radius:100px; font-family:'Tajawal'; font-weight:700; cursor:pointer; font-size:14px;}
+.tbtn.ghost{background:transparent; color:#fff; border:1px solid rgba(255,255,255,.4);}
+
+/* video card */
+.video-card{display:block; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px; box-shadow:var(--shadow); text-decoration:none; display:flex; align-items:center; gap:16px;}
+.play{flex:none; width:52px; height:52px; border-radius:50%; background:var(--green-600); color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px;}
+.video-txt strong{display:block; font-size:16px; margin-bottom:3px;}
+.video-txt span{font-size:13.5px; color:var(--ink-soft); word-break:break-all;}
+
+/* flip questions */
+.qgrid{display:grid; gap:14px;}
+.flip{position:relative; min-height:118px; perspective:1000px; cursor:pointer;}
+.flip-inner{position:relative; width:100%; height:100%; min-height:118px; transition:transform .5s; transform-style:preserve-3d;}
+.flip.open .flip-inner{transform:rotateY(180deg);}
+.flip-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; padding:18px; display:flex; align-items:center; font-size:15px;}
+.flip-front{background:var(--card); border:1px solid var(--line); font-weight:700;}
+.flip-back{background:var(--green-600); color:#fff; transform:rotateY(180deg); font-size:14px;}
+.tap-hint{font-size:12px; color:var(--gold); margin-top:6px;}
+
+/* quote */
+.quote{border-inline-start:3px solid var(--gold); padding:4px 18px; font-size:17px; color:var(--ink-soft); margin:18px 0;}
+
+/* teacher note box */
+.note{background:var(--card); border:1px dashed var(--green-500); border-radius:16px; padding:18px; font-size:14.5px; color:var(--ink-soft); margin-top:16px;}
+.note b{color:var(--ink);}
+
+/* tabs */
+.tabs{display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;}
+.tab{background:var(--card); border:1px solid var(--line); padding:9px 18px; border-radius:100px; font-size:14px; cursor:pointer; font-weight:700;}
+.tab.active{background:var(--green-600); color:#fff; border-color:var(--green-600);}
+.panel{display:none; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:var(--shadow);}
+.panel.active{display:block;}
+
+/* rubric accordion */
+.rubric{display:flex; flex-direction:column; gap:10px;}
+.rcrit{background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); overflow:hidden;}
+.rcrit-head{display:flex; justify-content:space-between; align-items:center; padding:15px 18px; cursor:pointer; font-weight:700;}
+.rlevels{display:none; grid-template-columns:1fr; gap:0; border-top:1px solid var(--line);}
+.rcrit.open .rlevels{display:grid;}
+.rlevel{padding:12px 18px; font-size:13.5px; border-bottom:1px solid var(--line); display:flex; gap:10px;}
+.rlevel:last-child{border-bottom:none;}
+.rlevel .tag{flex:none; font-weight:700; font-size:12px; padding:3px 10px; border-radius:100px; height:fit-content; white-space:nowrap;}
+.tag.t4{background:#DDF0E3; color:var(--green-800);}
+.tag.t3{background:#EFF3DC; color:#5B6B2C;}
+.tag.t2{background:#F7EBD8; color:#8A5A20;}
+.tag.t1{background:#F7DEDE; color:#8A2020;}
+:root[data-theme="dark"] .tag,@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag{filter:brightness(.85);}}
+
+/* check card */
+.checkgrid{display:flex; flex-direction:column; gap:12px; margin-top:20px;}
+.checkcard{display:flex; gap:14px; align-items:flex-start; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 18px; box-shadow:var(--shadow);}
+.checkletter{flex:none; width:42px; height:42px; border-radius:50%; background:var(--green-600); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Lalezar'; font-size:19px;}
+.checktxt strong{display:block; font-size:15.5px; margin-bottom:4px; color:var(--green-800);}
+.checktxt span{font-size:14px; color:var(--ink-soft);}
+.slogan{text-align:center; font-family:'Lalezar'; font-size:22px; color:var(--gold); margin-top:26px; letter-spacing:1px;}
+
+/* links */
+.linklist{display:flex; flex-direction:column; gap:10px;}
+.linkitem{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; font-size:14.5px; box-shadow:var(--shadow);}
+.linkitem b{display:block; margin-bottom:4px; color:var(--green-600);}
+.linkitem a{color:var(--green-500); word-break:break-all;}
+
+.submit-card{display:flex; align-items:center; gap:16px; background:var(--green-950); color:#fff; border-radius:18px; padding:22px; text-decoration:none; box-shadow:var(--shadow);}
+.submit-icon{flex:none; width:52px; height:52px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-size:22px;}
+.submit-txt strong{display:block; font-size:17px; margin-bottom:4px;}
+.submit-txt span{font-size:13.5px; color:#CFE1D7; word-break:break-all;}
+
+footer{text-align:center; padding:50px 20px 40px; color:var(--ink-soft); font-size:13px;}
+footer .diamonds{margin-bottom:16px;}
+
+.overflow-x{overflow-x:auto;}
+</style>
+</head>
+<body>
+
+<div class="navdots" id="navdots"></div>
+
+<div class="topbar">
+  <button id="menuBtn" class="menu-btn">☰ <span>الفهرس</span></button>
+</div>
+<div class="index-overlay" id="indexOverlay">
+  <div class="index-panel">
+    <div class="index-head"><span>فهرس الصفحة</span><button id="closeMenuBtn" class="close-btn">✕</button></div>
+    <div class="index-list" id="indexList"></div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-kicker">اليوم الوطني السعودي</div>
+  <h1>عزّنا بشجاعتنا<br>في ميادين الدفاع عن الوطن</h1>
+  <p class="sub">نشاط صفّي تفاعلي لطالبات المرحلة المتوسطة — نسخة رقمية مُعدّة خصيصًا لعرضها في الحصة الافتراضية</p>
+  <div class="badges">
+    <span class="badge">⏱ 45 دقيقة</span>
+    <span class="badge">👥 22 طالبة — 8 مجموعات</span>
+    <span class="badge">🎯 6 مراحل</span>
+  </div>
+  <div class="scrolldown">مرّر لأسفل ↓</div>
+</section>
+<div class="diamonds"></div>
+
+<section class="sec" id="s-agenda">
+  <div class="wrap">
+    <div class="eyebrow">نظرة عامة</div>
+    <h2 class="title">خطة سير الحصة</h2>
+    <div class="timeline" id="timeline"></div>
+
+    <div class="timer-card">
+      <div class="timer-label" id="timerPhaseLabel">اختر مرحلة من القائمة أعلاه لبدء توقيتها</div>
+      <div class="timer-num" id="timerNum">00:00</div>
+      <div class="timer-btns">
+        <button class="tbtn" id="startBtn">ابدأ</button>
+        <button class="tbtn ghost" id="pauseBtn">إيقاف مؤقت</button>
+        <button class="tbtn ghost" id="resetBtn">إعادة</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="s-intro">
+  <div class="wrap">
+    <div class="eyebrow">التمهيد — 10 دقائق</div>
+    <h2 class="title">الإثارة والتشويق</h2>
+    <p>ترحّب المعلمة بالطالبات، وتدعوهن لمشاهدة عرض القوات الجوية تُزيّن سماء الرياض احتفالًا وابتهاجًا باليوم الوطني.</p>
+    <a class="video-card" href="https://youtu.be/F7wclYJYH5o?si=ug5iRzX-pm-XeGy0" target="_blank" rel="noopener">
+      <span class="play">▶</span>
+      <span class="video-txt"><strong>فيديو العرض الجوي — يوتيوب</strong><span>youtu.be/F7wclYJYH5o</span></span>
+    </a>
+    <div class="quote">«دام عزّك يا وطن كل عام، في ذرى شيخ له القاسي يلين»</div>
+
+    <h3 style="font-size:17px; margin-top:30px;">أسئلة للنقاش (اضغط للكشف عن الإجابة المتوقعة)</h3>
+    <div class="qgrid" id="qgrid"></div>
+  </div>
+</section>
+
+<section class="sec" id="s-activity">
+  <div class="wrap">
+    <div class="eyebrow">النشاط الرئيسي — 10 دقائق</div>
+    <h2 class="title">مهمة المجموعات</h2>
+    <p>تُقسَّم الطالبات (22 طالبة) إلى 8 مجموعات — 6 مجموعات من 3 طالبات، ومجموعتان من طالبتين. في الحصة الافتراضية، استخدمي خاصية <b>غرف النقاش الفرعية</b> لتوزيعهن. تختار كل مجموعة موقفًا واحدًا من الثلاثة (يمكن أن يتكرر الموقف بين أكثر من مجموعة):</p>
+    <div class="tabs" id="tabs"></div>
+    <div id="panels"></div>
+    <div class="note"><b>بطاقة التحقّق</b> (عناصر تحليل الموقف) موضّحة بالتفصيل في القسم التالي — استخدميها مع كل موقف.</div>
+  </div>
+</section>
+
+<section class="sec" id="s-check">
+  <div class="wrap">
+    <div class="eyebrow">قبل أن تصدّقي أو تشاركي</div>
+    <h2 class="title">بطاقة تحقّق</h2>
+    <p>كيف أتحقق من هوية منتحلة أو محتوى مزيّف قبل أن أصدّق أو أشارك؟ اطبعي الكلمة في ذهنك: «تحقّق»</p>
+    <div class="checkgrid" id="checkgrid"></div>
+    <div class="note" style="border-style:solid;">
+      <b>نصيحة تقنية إضافية:</b> استخدمي البحث العكسي عن الصور (مثل Google Lens) لمعرفة إن كانت الصورة أو لقطة الشاشة متداولة من قبل في سياق مختلف تمامًا.
+    </div>
+    <div class="slogan">توقّف · تحقّق · ثم شارك</div>
+  </div>
+</section>
+
+<section class="sec" id="s-closing">
+  <div class="wrap">
+    <div class="eyebrow">العرض والختام</div>
+    <h2 class="title">رسالة الختام</h2>
+    <p>بعد عرض المجموعات وثناء المعلمة على أدائها، يُختتم النشاط بالتأكيد على:</p>
+    <div class="note" style="border-style:solid; background:var(--green-950); color:#fff; border-color:var(--green-950);">
+      أهمية <b style="color:var(--gold)">المواطنة الرقمية</b> في رفع مستوى الحماية الإلكترونية للفرد ضد الاختراقات والتنمر الرقمي، وتطوّر وعي الفرد بكيفية تقييم المعلومات وفحصها وكشف الشائعات وتجنّب نشرها.
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="s-rubric">
+  <div class="wrap">
+    <div class="eyebrow">أداة التقييم</div>
+    <h2 class="title">معايير التقييم (اضغط لعرض المستويات)</h2>
+    <div class="rubric" id="rubric"></div>
+  </div>
+</section>
+
+<section class="sec" id="s-links">
+  <div class="wrap">
+    <div class="eyebrow">مرجع سريع</div>
+    <h2 class="title">الروابط المهمة</h2>
+    <div class="linklist">
+      <div class="linkitem"><b>فيديو العرض الجوي (يوتيوب)</b><a href="https://youtu.be/F7wclYJYH5o?si=ug5iRzX-pm-XeGy0" target="_blank" rel="noopener">https://youtu.be/F7wclYJYH5o?si=ug5iRzX-pm-XeGy0</a></div>
+      <div class="linkitem"><b>بطاقة التحقق + جدول التقويم</b>روابط QR فقط في الملف الأصلي، بدون نص رابط متاح.</div>
+      <div class="linkitem"><b>كتاب هيئة التراث / موقع وزارة الثقافة</b>الرابط في الملف الأصلي ظهر مقتطعًا (drive.google.com/file...) — يُنصح بأخذه من نسخة PDF الأصلية أو البحث في موقع وزارة الثقافة السعودية.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="s-submit">
+  <div class="wrap">
+    <div class="eyebrow">آخر خطوة</div>
+    <h2 class="title">شاركي إجابة مجموعتك</h2>
+    <p>بعد الانتهاء من تحليل الموقف وكتابة التوصيات، ترسل ممثلة كل مجموعة الرد عبر النموذج التالي:</p>
+
+    <a class="submit-card" id="submitLink" href="#" target="_blank" rel="noopener">
+      <span class="submit-icon">📝</span>
+      <span class="submit-txt">
+        <strong>فتح نموذج إرسال الإجابات</strong>
+        <span id="submitUrlText">ضعي رابط نموذج Google Forms هنا</span>
+      </span>
+    </a>
+
+    <div class="note" style="margin-top:20px;">
+      <b>الحقول المقترحة في النموذج:</b>
+      <ul style="padding-inline-start:20px; margin:10px 0 0; font-size:14px;">
+        <li>اسم المجموعة / أسماء الطالبات</li>
+        <li>الموقف الذي اخترناه (الأول / الثاني / الثالث)</li>
+        <li>ملخص تحليلنا للموقف</li>
+        <li>أهم توصياتنا</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="diamonds"></div>
+  اليوم الوطني السعودي — المرحلة المتوسطة
+</footer>
+
+<script>
+const PHASES=[
+ {t:"10 دقائق",title:"التمهيد: إثارة وتشويق",desc:"فيديو العرض الجوي + سؤالان نقاشيان",sec:600},
+ {t:"3 دقائق",title:"تعليق المعلمة",desc:"ربط المشهد بمفهوم المواطنة الرقمية",sec:180},
+ {t:"2 دقيقة",title:"تقسيم المجموعات",desc:"22 طالبة، 8 مجموعات (غرف نقاش فرعية)",sec:120},
+ {t:"15 دقيقة",title:"النشاط الرئيسي",desc:"تحليل موقف + بطاقة تحقق + توصيات",sec:900},
+ {t:"12 دقيقة",title:"العرض والختام",desc:"عرض المجموعات الثماني وتعليق المعلمة",sec:720},
+ {t:"3 دقائق",title:"الختام",desc:"رسالة عن المواطنة الرقمية والحماية الإلكترونية",sec:180},
+];
+const timeline=document.getElementById('timeline');
+PHASES.forEach((p,i)=>{
+  const el=document.createElement('div');
+  el.className='phase';
+  el.innerHTML=`<div class="phase-head"><span class="chev">⌄</span><span class="phase-title">${p.title}</span><span class="phase-time">${p.t}</span></div><div class="phase-desc">${p.desc}</div>`;
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.phase').forEach(x=>{if(x!==el)x.classList.remove('open');});
+    el.classList.toggle('open');
+    setPhase(i);
+  });
+  timeline.appendChild(el);
+});
+
+let remaining=0, timerInt=null, activePhase=null;
+const timerNum=document.getElementById('timerNum');
+const timerPhaseLabel=document.getElementById('timerPhaseLabel');
+function fmt(s){const m=Math.floor(s/60),ss=s%60;return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');}
+function setPhase(i){
+  activePhase=i; remaining=PHASES[i].sec;
+  timerPhaseLabel.textContent=PHASES[i].title;
+  timerNum.textContent=fmt(remaining);
+  clearInterval(timerInt); timerInt=null;
+}
+document.getElementById('startBtn').addEventListener('click',()=>{
+  if(activePhase===null){setPhase(0); document.querySelectorAll('.phase')[0].classList.add('open');}
+  if(timerInt) return;
+  timerInt=setInterval(()=>{
+    if(remaining<=0){clearInterval(timerInt); timerInt=null; timerNum.textContent="انتهى ⏰"; return;}
+    remaining--; timerNum.textContent=fmt(remaining);
+  },1000);
+});
+document.getElementById('pauseBtn').addEventListener('click',()=>{clearInterval(timerInt); timerInt=null;});
+document.getElementById('resetBtn').addEventListener('click',()=>{if(activePhase!==null)setPhase(activePhase);});
+
+const QUESTIONS=[
+ {q:"صفي شعورك وأنتِ تشاهدين هذا العرض الجوّي لقوات وزارة الدفاع.",a:"أشعر بالفخر والاعتزاز بهذا الوطن العظيم الذي سخّر للوطن ما يستحقه من الحماية والحفظ والأمن."},
+ {q:"هل سبق وأن شاهدتِ في الواقع عروضًا تُنفّذ كل عام ضمن احتفالات اليوم الوطني؟ وماذا تمنّيتِ في تلك اللحظة؟",a:"تُجيب كل طالبة حسب خبرتها الشخصية، وقد تتمنى الطالبة أن تكون طيّارة تُحلّق في سماء الوطن حامية ومدافعة."},
+];
+const qgrid=document.getElementById('qgrid');
+QUESTIONS.forEach(item=>{
+  const el=document.createElement('div');
+  el.className='flip';
+  el.innerHTML=`<div class="flip-inner"><div class="flip-face flip-front">${item.q}</div><div class="flip-face flip-back">${item.a}</div></div>`;
+  el.addEventListener('click',()=>el.classList.toggle('open'));
+  const hint=document.createElement('div'); hint.className='tap-hint'; hint.textContent='اضغط لعرض الإجابة المتوقعة ›';
+  qgrid.appendChild(el); qgrid.appendChild(hint);
+});
+
+const SITUATIONS=[
+ {icon:"⚠️",title:"الموقف الأول",body:"شاهد أحد المواطنين حادثة تشابك بين مجموعة من الأشخاص بجوار أحد المواقع التي يُمنع فيها التصوير، ولاحظ مسارعة أحد المارة إلى التقاط المشهد عبر شاشة جواله من شتى الجهات، فاقترب منه قائلًا: «لا أجد في الموقف ما يستحق التصوير، كما أنك في منطقة يُمنع فيها التصوير!». هلّا فزعتَ معي لنُصلح بينهم؟ فأجابه: لا، اتركهم قليلًا حتى ينتهي، لقد جهّزت تعليقًا على هذا المشهد! متأكد أنه سيرفع عدد مشاهداته، ويكون ترند."},
+ {icon:"🚫",title:"الموقف الثاني",body:"تداول مستخدمون منشورًا يزعم أن ارتفاع حوادث السرقة في أحد الأحياء سببه «الجالية الأجنبية» القاطنة فيه تحديدًا، مرفقًا بدعوات لمقاطعة محالّها التجارية. لم يستند المنشور إلى أي إحصائية رسمية من جهة أمنية، بل إلى «تجارب شخصية» غير موثّقة، ومع ذلك أُعيد نشره آلاف المرات مصحوبًا بتعليقات عنصرية، ما دفع بعض العائلات إلى تجنّب التعامل مع محلات يملكها أفراد من الجالية نفسها دون أي سبب حقيقي يخصهم بالذات."},
+ {icon:"🎭",title:"الموقف الثالث",body:"انتشرت لقطة لمحادثة تُنسب إلى شخصية مشهورة، تتلفّظ فيها بعبارات غير مناسبة تجاه شخص آخر، فطالب المجتمع الرقمي بمعاقبتها فورًا. تبيّن لاحقًا أن اللقطة ملفّقة بالكامل عبر أحد تطبيقات تزييف المحادثات، وأن هذه الشخصية لا علاقة لها بالواقعة التي أثارت الجدل أصلًا، لكن الأذى لحق بها قبل أن يصل التصحيح إلى العدد نفسه من المجتمع الرقمي."},
+];
+const tabs=document.getElementById('tabs'), panels=document.getElementById('panels');
+SITUATIONS.forEach((s,i)=>{
+  const b=document.createElement('button'); b.className='tab'+(i===0?' active':''); b.textContent=s.icon+' '+s.title;
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); document.getElementById('panel'+i).classList.add('active');
+  });
+  tabs.appendChild(b);
+  const p=document.createElement('div'); p.className='panel'+(i===0?' active':''); p.id='panel'+i;
+  p.innerHTML=`<p style="font-size:15px; background:var(--cream); border-radius:12px; padding:14px; border:1px solid var(--line);">${s.body}</p><p style="margin-top:14px;">تتأمل المجموعة الموقف وتقوم بـ:</p><ul style="padding-inline-start:20px; margin:8px 0 0; font-size:14.5px; color:var(--ink-soft);"><li>تحليل الموقف ونقده وفق عناصر بطاقة التحقق.</li><li>كتابة أبرز التوصيات في ختام المهمة.</li><li>الاستعداد لعرض النتائج أمام بقية الطالبات.</li></ul>`;
+  panels.appendChild(p);
+});
+
+const CHECKLIST=[
+ {letter:"ت",title:"تفحّص الحساب نفسه",desc:"تاريخ إنشاء الحساب، عدد المتابعين مقابل عدد المنشورات، وعلامة التوثيق إن وجدت. احذري أيضًا من الفروق الدقيقة في اسم المستخدم (حرف أو رقم مستبدل) التي تحاكي حسابًا حقيقيًا."},
+ {letter:"ح",title:"حدّد أول ناشر للمحتوى",desc:"ابحثي: من نشر هذا الخبر أو المقطع أولًا؟ هل هو حساب إخباري أو جهة معروفة، أم حساب مجهول ظهر فجأة لنشر خبر واحد مثير؟"},
+ {letter:"ق",title:"قارن بالحساب الرسمي مباشرة",desc:"لا تكتفي بالرابط المُرسَل إليك؛ ادخلي بنفسك على الحساب الرسمي المعروف للشخص أو الجهة، وتحققي هل نشروا الأمر نفسه فعلًا أو نفوه."},
+ {letter:"ق",title:"قبل أن تنشري... توقّفي",desc:"لا تُعيدي نشر أي اتهام أو اقتباس مثير قبل التأكد؛ الضرر ينتشر أسرع من التصحيح. عند الشك اسألي معلمتك أو ولي أمرك."},
+];
+const checkgrid=document.getElementById('checkgrid');
+CHECKLIST.forEach(item=>{
+  const el=document.createElement('div'); el.className='checkcard';
+  el.innerHTML=`<span class="checkletter">${item.letter}</span><span class="checktxt"><strong>${item.title}</strong><span>${item.desc}</span></span>`;
+  checkgrid.appendChild(el);
+});
+
+const RUBRIC=[
+ {c:"وضوح الفكرة الوطنية",l:[["ممتاز","t4","عرض الفكرة بوضوح وبلغة وطنية مؤثرة مرتبطة بالرؤية"],["جيد جدًا","t3","عرض الفكرة بوضوح وارتباط جزئي بالرؤية"],["جيد","t2","عرض الفكرة مقبول مع بعض الغموض"],["بحاجة لتحسين","t1","الفكرة غير واضحة أو غير مرتبطة بمفهوم وطني"]]},
+ {c:"طريقة العرض والتقديم",l:[["ممتاز","t4","استخدام وسيلة مبتكرة، تفاعل مميز، لغة جسد مناسبة"],["جيد جدًا","t3","استخدام وسيلة جيدة وتفاعل واضح من الفريق"],["جيد","t2","استخدام وسيلة تقليدية، تفاعل محدود"],["بحاجة لتحسين","t1","عرض ضعيف أو غير منظم، بدون تفاعل"]]},
+ {c:"العمل الجماعي",l:[["ممتاز","t4","تقسيم متوازن للأدوار، تعاون ملحوظ بين الأفراد"],["جيد جدًا","t3","تقسيم مقبول وتعاون جيد"],["جيد","t2","مشاركة متفاوتة بين أفراد الفريق"],["بحاجة لتحسين","t1","افتقار للتنسيق أو مشاركة محدودة لشخص أو اثنين"]]},
+ {c:"الرسالة الختامية",l:[["ممتاز","t4","رسالة ملهمة تُعبّر عن فخر وطني ورسالة سامية"],["جيد جدًا","t3","رسالة واضحة مرتبطة بالموضوع"],["جيد","t2","رسالة ختامية عامة أو غير مكتملة"],["بحاجة لتحسين","t1","غياب الرسالة أو ضعف محتواها"]]},
+ {c:"الربط برؤية المملكة 2030",l:[["ممتاز","t4","دمج واضح ومحترف لمشاريع الرؤية مع إقناع وتأثير"],["جيد جدًا","t3","ربط جيد بين العرض ومشاريع الرؤية بلغة مفهومة"],["جيد","t2","ارتباط سطحي أو غير دقيق بمشروع أو قيمة من الرؤية"],["بحاجة لتحسين","t1","غياب واضح لذكر مشاريع الرؤية أو الارتباط بها"]]},
+];
+const rubricEl=document.getElementById('rubric');
+RUBRIC.forEach(item=>{
+  const el=document.createElement('div'); el.className='rcrit';
+  el.innerHTML=`<div class="rcrit-head"><span class="chev">⌄</span><span>${item.c}</span></div><div class="rlevels">${item.l.map(x=>`<div class="rlevel"><span class="tag ${x[1]}">${x[0]}</span><span>${x[2]}</span></div>`).join('')}</div>`;
+  el.querySelector('.rcrit-head').addEventListener('click',()=>el.classList.toggle('open'));
+  rubricEl.appendChild(el);
+});
+
+// رابط نموذج جمع الإجابات — استبدلي القيمة التالية برابط نموذج Google Forms الخاص بك بعد إنشائه
+const FORM_URL = "https://forms.gle/ZUnL8FobgnZXS3qW7";
+const submitLink = document.getElementById('submitLink');
+const submitUrlText = document.getElementById('submitUrlText');
+if(FORM_URL && FORM_URL.indexOf('REPLACE_WITH') === -1){
+  submitLink.href = FORM_URL;
+  submitUrlText.textContent = FORM_URL;
+} else {
+  submitLink.addEventListener('click', e=>e.preventDefault());
+  submitLink.style.opacity = '.7';
+}
+
+// الفهرس العلوي
+const INDEX_ITEMS=[
+ {id:"top",icon:"🏠",label:"البداية"},
+ {id:"s-agenda",icon:"🗓️",label:"خطة سير الحصة"},
+ {id:"s-intro",icon:"🎬",label:"التمهيد"},
+ {id:"s-activity",icon:"👥",label:"النشاط الرئيسي"},
+ {id:"s-check",icon:"🔎",label:"بطاقة تحقّق"},
+ {id:"s-closing",icon:"🏁",label:"الختام"},
+ {id:"s-rubric",icon:"📊",label:"معايير التقييم"},
+ {id:"s-links",icon:"🔗",label:"الروابط المهمة"},
+ {id:"s-submit",icon:"📝",label:"إرسال الإجابات"},
+];
+const indexList=document.getElementById('indexList');
+const indexOverlay=document.getElementById('indexOverlay');
+INDEX_ITEMS.forEach((it,i)=>{
+  const el=document.createElement('div'); el.className='index-item';
+  el.innerHTML=`<span class="num">${it.icon}</span><span>${it.label}</span>`;
+  el.addEventListener('click',()=>{
+    indexOverlay.classList.remove('open');
+    if(it.id==='top'){ window.scrollTo({top:0,behavior:'smooth'}); return; }
+    document.getElementById(it.id).scrollIntoView({behavior:'smooth'});
+  });
+  indexList.appendChild(el);
+});
+document.getElementById('menuBtn').addEventListener('click',()=>indexOverlay.classList.add('open'));
+document.getElementById('closeMenuBtn').addEventListener('click',()=>indexOverlay.classList.remove('open'));
+indexOverlay.addEventListener('click',(e)=>{ if(e.target===indexOverlay) indexOverlay.classList.remove('open'); });
+
+// section nav dots
+const secs=[...document.querySelectorAll('section.sec')];
+const navdots=document.getElementById('navdots');
+secs.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.addEventListener('click',()=>s.scrollIntoView({behavior:'smooth'}));
+  navdots.appendChild(b);
+});
+const dotEls=[...navdots.children];
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const idx=secs.indexOf(e.target);
+      dotEls.forEach(d=>d.classList.remove('active'));
+      if(dotEls[idx]) dotEls[idx].classList.add('active');
+    }
+  });
+},{threshold:0.5});
+secs.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
